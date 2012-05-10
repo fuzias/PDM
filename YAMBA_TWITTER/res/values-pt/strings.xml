@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TWITTER</string>
+    
+    <string name="titleStatus">Actualizar Estado</string>
+    <string name="buttonUpdate">Actualizar</string>
+    <string name="hintText">Insira a sua mensagem de 140 caracteres</string>
+    
+    <string name="titleUsername">Nome de utilizador</string>
+    <string name="summaryUsername">Insira o nome de utilizador</string>
+
+    <string name="titlePassword">Password</string>
+    <string name="summaryPassword">Insira a sua password</string>
+    
+	<string name="titleApiRoot">Api root URL</string>
+    <string name="summaryApiRoot">Insira a URL da api</string> 
+    
+    <string  name="titleUserPref">Preferencias do Utilizador</string>
+	<string name="titleTimeline">Timeline</string>
+	<string name="maxCharactersPerLineTitleUserPref">Max Caracteres</string>
+    <string name="maxCharactersPerLineSummaryUserPref">Max Caracteres permitidos por mensagem</string>
+    <string name="charactersPerMessageShownSummaryTimeline">Number of characters shown per message in timeline</string>
+    <string name="charactersPerMessageShownTimelineTitleUserPrefs">Character Shown</string>
+    <string name="titleUpdateTimeline"> Update Timeline</string>
+	
+</resources>

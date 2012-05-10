@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/itemUserPrefs"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/titleUserPref">
+    </item>
+    <item
+        android:id="@+id/itemStatus"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:title="@string/titleStatus">
+    </item>
+    <item
+        android:id="@+id/itemTimeline"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/titleTimeline">
+    </item>
+    <item
+        android:id="@+id/itemUpdateTimeline"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/titleUpdateTimeline">
+    </item>
+
+</menu>

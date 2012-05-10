@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/garfield_fire"
+    android:orientation="vertical" >
+
+    <!-- Title -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="@string/titleTimeline"
+        android:textColor="#fff"
+        android:textSize="30sp" />
+    <!-- Text output wrapper -->
+
+
+    <!-- Text Output -->
+
+    <ListView
+        android:id="@+id/listTimeline"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#6FFF" />
+
+</LinearLayout>

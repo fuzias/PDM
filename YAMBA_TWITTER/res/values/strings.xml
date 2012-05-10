@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TWITTER</string>
+    <string name="titleStatus">Status Update</string>
+    <string name="buttonUpdate">Update</string>
+    <string name="hintText">Please enter your 140 character status</string>
+    <string name="titleUsername">Username</string>
+    <string name="summaryUsername">Enter your twitter username</string>
+    <string name="titlePassword">Password</string>
+    <string name="summaryPassword">Enter your twitter acount password</string>
+    <string name="titleApiRoot">Api root URL</string>
+    <string name="summaryApiRoot">Enter api root URL</string>
+    <string name="titleUserPref">User Preferences</string>
+    <string name="titleTimeline">Timeline</string>
+    <string name="maxCharactersPerLineTitleUserPref">Max Characters</string>
+    <string name="maxCharactersPerLineSummaryUserPref">Max Characters permitted per message</string>
+    <string name="charactersPerMessageShownSummaryTimeline">Number of characters shown per message in timeline</string>
+    <string name="charactersPerMessageShownTimelineTitleUserPrefs">Character Shown</string>
+    <string name="titleUpdateTimeline"> Update Timeline</string>
+</resources>
