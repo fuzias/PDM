@@ -16,10 +16,10 @@ import android.widget.Toast;
 public class TwitterApp extends Application implements
 		OnSharedPreferenceChangeListener {
 
-	private static final String consumerKey = "Nd9Zqz1Xq3sXiXzIaZDRg";
+	/*private static final String consumerKey = "Nd9Zqz1Xq3sXiXzIaZDRg";
 	private static final String consumerSecret = "KDdhZz3l4uZLHvRfZjn4GOBtS35gKKCajDYCLcbg5hQ";
 	private static final String accessToken = "19740161-cdQDKvmcLwtyJI8UI0GkK2iDQ3Tgu5VB1vOaIaETT";
-	private static final String accessTokenSecret = "qqBUBc9wOPm5ndVYTNvGlk9xaR1M58vecuM1uPswYAs";
+	private static final String accessTokenSecret = "qqBUBc9wOPm5ndVYTNvGlk9xaR1M58vecuM1uPswYAs";*/
 
 	private static final String TAG = TwitterApp.class.getSimpleName();
 	private Twitter twitter;
@@ -51,10 +51,10 @@ public class TwitterApp extends Application implements
 		if (twitter == null) {
 			ConfigurationBuilder cb = new ConfigurationBuilder();
 			cb.setDebugEnabled(true)
-					.setOAuthConsumerKey(consumerKey)
-					.setOAuthConsumerSecret(consumerSecret)
-					.setOAuthAccessToken(accessToken)
-					.setOAuthAccessTokenSecret(accessTokenSecret)
+					.setOAuthConsumerKey(userPreferences.getString("consumerKey", ""))
+					.setOAuthConsumerSecret(userPreferences.getString("consumerSecret", ""))
+					.setOAuthAccessToken(userPreferences.getString("accessToken", ""))
+					.setOAuthAccessTokenSecret(userPreferences.getString("accessTokenSecret", ""))
 					.setOAuthRequestTokenURL(
 							"https://api.twitter.com/oauth/request_token")
 					.setOAuthAuthorizationURL(
