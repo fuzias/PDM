@@ -23,5 +23,25 @@
         android:key="charactersPerMessageShownTimeline"
         android:summary="@string/charactersPerMessageShownSummaryTimeline"
         android:title="@string/charactersPerMessageShownTimelineTitleUserPrefs" />
+    <EditTextPreference 
+        android:defaultValue="Nd9Zqz1Xq3sXiXzIaZDRg"
+        android:key="consumerKey" 
+        android:title="@strings/TitleConsumerKey" 
+        android:summary="@strings/SummaryConsumerKey"/>
+    <EditTextPreference 
+        android:defaultValue="KDdhZz3l4uZLHvRfZjn4GOBtS35gKKCajDYCLcbg5hQ"
+        android:key="consumerSecret" 
+        android:title="@strings/TitleConsumerSecret" 
+        android:summary="@strings/SummaryConsumerSecret"/>
+    <EditTextPreference 
+        android:defaultValue="19740161-cdQDKvmcLwtyJI8UI0GkK2iDQ3Tgu5VB1vOaIaETT"
+        android:key="accessToken" 
+        android:title="@strings/TitleAccessToken" 
+        android:summary="@strings/SummaryAccessToken"/>
+    <EditTextPreference 
+        android:defaultValue="qqBUBc9wOPm5ndVYTNvGlk9xaR1M58vecuM1uPswYAs"
+        android:title="@strings/TitleAccessTokenSecret" 
+        android:summary="@strings/SummaryAccessTokenSecret" 
+        android:key="accessTokenSecret"/>
 
 </PreferenceScreen>

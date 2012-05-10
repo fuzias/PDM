@@ -18,4 +18,17 @@
     <string name="charactersPerMessageShownSummaryTimeline">Number of characters shown per message in timeline</string>
     <string name="charactersPerMessageShownTimelineTitleUserPrefs">Character Shown</string>
     <string name="titleUpdateTimeline"> Update Timeline</string>
+    <string name="TitleConsumerKey">Consumer Key</string>
+    <string name="SummaryConsumerKey">Insert your Consumer Key</string>
+    
+    <string name="TitleConsumerSecret">Consumer Secret</string>
+    <string name="SummaryConsumerSecret">Insert your Consumer Secret</string>
+    
+    <string name="TitleAccessToken">Access Token</string>
+    <string name="SummaryAccessToken">Insert your Access Token</string>
+    
+    <string name="TitleAccessTokenSecret">Access Token Secret</string>
+    <string name="SummaryAccessTokenSecret">Insert your Access Token Secret</string>
+    
+    
 </resources>
