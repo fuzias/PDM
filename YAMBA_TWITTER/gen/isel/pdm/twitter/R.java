@@ -40,6 +40,14 @@ public final class R {
         public static final int menu=0x7f060000;
     }
     public static final class string {
+        public static final int SummaryAccessToken=0x7f050016;
+        public static final int SummaryAccessTokenSecret=0x7f050018;
+        public static final int SummaryConsumerKey=0x7f050012;
+        public static final int SummaryConsumerSecret=0x7f050014;
+        public static final int TitleAccessToken=0x7f050015;
+        public static final int TitleAccessTokenSecret=0x7f050017;
+        public static final int TitleConsumerKey=0x7f050011;
+        public static final int TitleConsumerSecret=0x7f050013;
         public static final int app_name=0x7f050000;
         public static final int buttonUpdate=0x7f050002;
         public static final int charactersPerMessageShownSummaryTimeline=0x7f05000e;

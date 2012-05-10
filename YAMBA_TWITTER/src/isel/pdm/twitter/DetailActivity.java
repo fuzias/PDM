@@ -1,13 +1,16 @@
 package isel.pdm.twitter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class DetailActivity extends BaseActivity {
-	TextView username, post, timeSincePost;
+	private static final String TAG = DetailActivity.class.getSimpleName();
+	private	TextView username, post, timeSincePost;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.detail);
 

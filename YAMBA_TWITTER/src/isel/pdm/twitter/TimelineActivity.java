@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class TimelineActivity extends BaseActivity implements
 		OnItemClickListener {
@@ -26,6 +25,7 @@ public class TimelineActivity extends BaseActivity implements
 		Log.d(TAG, "onCreate3");
 		if (twitterApp.userPreferences.getString("username", null) == null)
 			startActivityForResult(new Intent(this, UserPrefActivity.class), 1);
+		//listViewTimelime.setOnClickListener(this);
 
 		((TwitterApp) getApplication()).getTimeline();
 	}
@@ -45,7 +45,7 @@ public class TimelineActivity extends BaseActivity implements
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 		Log.d(TAG, "onItemClick");
-		Status status = twitterApp.timelineList.get(pos);
+		Status status = twitterApp.adapter.getItem(pos);
 		/*
 		 * Toast.makeText( this, status.getUser().getScreenName() + ": \n" +
 		 * status.getText() + "\n" + DateUtils.getRelativeTimeSpanString(status
@@ -65,13 +65,23 @@ public class TimelineActivity extends BaseActivity implements
 		Log.d(TAG, "UpdateTimeliner");
 		Log.d(TAG, (((TwitterApp) getApplication()).userPreferences.getString(
 				"charactersPerMessageShownTimeline", "50")));
+		
 		Log.d(TAG, "UpdateTimeline");
-		listViewTimelime
+		twitterApp.adapter = new TimelineAdapter(
+				this,
+				((TwitterApp) getApplication()).getTimeline(),
+				Integer.parseInt(((TwitterApp) getApplication()).userPreferences
+						.getString("charactersPerMessageShownTimeline",
+								"50")));
+		listViewTimelime.setAdapter(twitterApp.adapter);
+		/*listViewTimelime
 				.setAdapter(new TimelineAdapter(
 						this,
 						((TwitterApp) getApplication()).getTimeline(),
 						Integer.parseInt(((TwitterApp) getApplication()).userPreferences
 								.getString("charactersPerMessageShownTimeline",
-										"50"))));
+										"50"))));*/
 	}
+	
+	
 }

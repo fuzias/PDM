@@ -41,8 +41,10 @@ public class BaseActivity extends Activity {
 			startActivity(new Intent(this, TimelineActivity.class));
 			break;
 		case R.id.itemUpdateTimeline:
+			((TwitterApp) getApplication()).updateTimeLine();
+						/* 
 			Toast.makeText(this, "Geting Tweets from Twitter",
-					Toast.LENGTH_SHORT);
+					Toast.LENGTH_SHORT);*/
 			// TODO Async get tweets from twitter
 			break;
 		}

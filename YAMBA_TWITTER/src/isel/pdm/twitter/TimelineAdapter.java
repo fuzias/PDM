@@ -27,6 +27,11 @@ public class TimelineAdapter extends ArrayAdapter<Status> implements
 		private TextView userTextView;
 		private TextView messageTextView;
 	}
+	
+	public void addNewElements(List<Status> tweets){
+		tweets.removeAll(statuses);
+		statuses.addAll(tweets);
+	}
 
 	public TimelineAdapter(Context context, List<Status> objects,
 			int messageLength) {
@@ -111,7 +116,7 @@ public class TimelineAdapter extends ArrayAdapter<Status> implements
 
 	public boolean areAllItemsEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean isEnabled(int arg0) {
