@@ -46,15 +46,19 @@ public class TimelineActivity extends BaseActivity implements
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 		Log.d(TAG, "onItemClick");
 		Status status = twitterApp.timelineList.get(pos);
-		Toast.makeText(
-				this,
-				status.getUser().getScreenName()
-						+ ": \n"
-						+ status.getText()
-						+ "\n"
-						+ DateUtils.getRelativeTimeSpanString(status
-								.getCreatedAt().getTime()), Toast.LENGTH_LONG);
+		/*
+		 * Toast.makeText( this, status.getUser().getScreenName() + ": \n" +
+		 * status.getText() + "\n" + DateUtils.getRelativeTimeSpanString(status
+		 * .getCreatedAt().getTime()), Toast.LENGTH_LONG);
+		 */
 		// TODO Start DetailActivity
+		Intent detailActivity = new Intent(TimelineActivity.this,
+				DetailActivity.class);
+		detailActivity.putExtra("username", status.getUser().getScreenName());
+		detailActivity.putExtra("post", status.getText());
+		detailActivity.putExtra("username", DateUtils
+				.getRelativeTimeSpanString(status.getCreatedAt().getTime()));
+		this.startActivity(detailActivity);
 	}
 
 	protected void updateTimeline() {
