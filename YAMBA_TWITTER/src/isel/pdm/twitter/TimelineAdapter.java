@@ -15,22 +15,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-public class TimelineAdapter extends ArrayAdapter<Status> implements
-		ListAdapter {
-	private Context context;
+public class TimelineAdapter extends ArrayAdapter<Status>{
 	private int messageLength;
 	private static final String TAG = "TimelineAdapter";
-	private List<Status> statuses;
 
 	private static class Holder {
 		private TextView createAtTextView;
 		private TextView userTextView;
 		private TextView messageTextView;
 	}
-	
-	public void addNewElements(List<Status> tweets){
-		tweets.removeAll(statuses);
-		statuses.addAll(tweets);
+
+	public void addNewElements(List<Status> tweets) {
+		for (int i = tweets.size() - 1; i >= 0; --i) {
+			this.insert(tweets.get(i), 0);
+		}
+		this.notifyDataSetChanged();
 	}
 
 	public TimelineAdapter(Context context, List<Status> objects,
@@ -38,18 +37,16 @@ public class TimelineAdapter extends ArrayAdapter<Status> implements
 		super(context, R.layout.message, R.id.listTimeline, objects);
 		Log.d(TAG, "TimelineAdapter1");
 		Log.d(TAG, "--" + (objects == null));
-		this.context = context;
 		this.messageLength = messageLength;
-		this.statuses = objects;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Log.d(TAG, "getView");
 		View rowView = convertView;
 		if (rowView == null) {
-			rowView = ((LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-					.inflate(R.layout.message, parent, false);
+			rowView = ((LayoutInflater) getContext().getSystemService(
+					Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.message,
+					parent, false);
 			Holder holder = new Holder();
 			holder.createAtTextView = (TextView) rowView
 					.findViewById(R.id.messageCreatedAt);
@@ -70,58 +67,6 @@ public class TimelineAdapter extends ArrayAdapter<Status> implements
 				.setText(message.length() <= messageLength ? message : message
 						.substring(0, messageLength - 1));
 		return rowView;
-	}
-
-	public int getCount() {
-		return statuses.size();
-	}
-
-	public Status getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return this.statuses.get(arg0);
-	}
-
-	public long getItemId(int arg0) {
-		return statuses.get(arg0).getCreatedAt().getTime();
-	}
-
-	public int getItemViewType(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getViewTypeCount() {
-		return getCount();
-	}
-
-	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return statuses.size() > 0;
-	}
-
-	public void registerDataSetObserver(DataSetObserver arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void unregisterDataSetObserver(DataSetObserver arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public boolean areAllItemsEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public boolean isEnabled(int arg0) {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 }

@@ -2,10 +2,12 @@ package isel.pdm.twitter;
 
 import twitter4j.Status;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -25,9 +27,10 @@ public class TimelineActivity extends BaseActivity implements
 		Log.d(TAG, "onCreate3");
 		if (twitterApp.userPreferences.getString("username", null) == null)
 			startActivityForResult(new Intent(this, UserPrefActivity.class), 1);
-		//listViewTimelime.setOnClickListener(this);
+		listViewTimelime.setOnItemClickListener(this);
 
 		((TwitterApp) getApplication()).getTimeline();
+		// deve chamar um metodo que vai ao twitter buscar os tweets
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class TimelineActivity extends BaseActivity implements
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume");
-		updateTimeline();
+		getTimeline();
 	}
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
@@ -56,32 +59,32 @@ public class TimelineActivity extends BaseActivity implements
 				DetailActivity.class);
 		detailActivity.putExtra("username", status.getUser().getScreenName());
 		detailActivity.putExtra("post", status.getText());
-		detailActivity.putExtra("username", DateUtils
+		detailActivity.putExtra("timesincepost", DateUtils
 				.getRelativeTimeSpanString(status.getCreatedAt().getTime()));
 		this.startActivity(detailActivity);
 	}
 
-	protected void updateTimeline() {
+	
+	//get timeline list of twitterapp
+	protected void getTimeline() {
 		Log.d(TAG, "UpdateTimeliner");
 		Log.d(TAG, (((TwitterApp) getApplication()).userPreferences.getString(
 				"charactersPerMessageShownTimeline", "50")));
-		
+
 		Log.d(TAG, "UpdateTimeline");
 		twitterApp.adapter = new TimelineAdapter(
 				this,
-				((TwitterApp) getApplication()).getTimeline(),
+				twitterApp.getTimelineList()
+				/* ((TwitterApp) getApplication()).getTimeline() */,
 				Integer.parseInt(((TwitterApp) getApplication()).userPreferences
-						.getString("charactersPerMessageShownTimeline",
-								"50")));
+						.getString("charactersPerMessageShownTimeline", "50")));
 		listViewTimelime.setAdapter(twitterApp.adapter);
-		/*listViewTimelime
-				.setAdapter(new TimelineAdapter(
-						this,
-						((TwitterApp) getApplication()).getTimeline(),
-						Integer.parseInt(((TwitterApp) getApplication()).userPreferences
-								.getString("charactersPerMessageShownTimeline",
-										"50"))));*/
+		/*
+		 * listViewTimelime .setAdapter(new TimelineAdapter( this, ((TwitterApp)
+		 * getApplication()).getTimeline(), Integer.parseInt(((TwitterApp)
+		 * getApplication()).userPreferences
+		 * .getString("charactersPerMessageShownTimeline", "50"))));
+		 */
 	}
-	
-	
+
 }

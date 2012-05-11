@@ -29,6 +29,10 @@
         <activity
             android:name=".UserPrefActivity"
             android:label="@string/titleUserPref" />
+         <activity
+            android:name=".DetailActivity"
+            android:label="@string/titlePost" />
     </application>
+    
 
 </manifest>

@@ -29,6 +29,6 @@
     
     <string name="TitleAccessTokenSecret">Access Token Secret</string>
     <string name="SummaryAccessTokenSecret">Insert your Access Token Secret</string>
-    
+    <string name="titlePost">Post</string>
     
 </resources>

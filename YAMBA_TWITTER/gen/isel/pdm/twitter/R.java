@@ -60,6 +60,7 @@ public final class R {
         public static final int summaryUsername=0x7f050005;
         public static final int titleApiRoot=0x7f050008;
         public static final int titlePassword=0x7f050006;
+        public static final int titlePost=0x7f050019;
         public static final int titleStatus=0x7f050001;
         public static final int titleTimeline=0x7f05000b;
         public static final int titleUpdateTimeline=0x7f050010;

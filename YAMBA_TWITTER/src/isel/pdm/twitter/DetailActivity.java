@@ -23,6 +23,9 @@ public class DetailActivity extends BaseActivity {
 			this.username.setText(extras.getString("username"));
 			this.post.setText(extras.getString("post"));
 			this.timeSincePost.setText(extras.getString("timesincepost"));
+			Log.d(TAG, extras.getString("username"));
+			Log.d(TAG, extras.getString("post"));
+			Log.d(TAG, extras.getString("timesincepost"));
 		} else {
 			this.username.setText("username");
 			this.post.setText("post");
