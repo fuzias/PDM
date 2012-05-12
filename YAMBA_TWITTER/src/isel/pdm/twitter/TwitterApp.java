@@ -36,8 +36,8 @@ public class TwitterApp extends Application implements
 	protected SharedPreferences userPreferences;
 
 	private List<Status> timelineList;
-	
-	
+
+	protected StatusUploadService uploadService;
 
 	public List<Status> getTimelineList() {
 		return timelineList;
@@ -51,15 +51,16 @@ public class TwitterApp extends Application implements
 		userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		userPreferences.registerOnSharedPreferenceChangeListener(this);
 		
-		/*new Handler(){
-
-			@Override
-			public void handleMessage(Message msg) {
-				adapter.add(msg.getData().get)
-			}
-			
-			
-		};*/
+		uploadService = new StatusUploadService();
+		/*
+		 * new Handler(){
+		 * 
+		 * @Override public void handleMessage(Message msg) {
+		 * adapter.add(msg.getData().get) }
+		 * 
+		 * 
+		 * };
+		 */
 	}
 
 	@Override
@@ -121,7 +122,7 @@ public class TwitterApp extends Application implements
 				Log.d(TAG, "updateTimeLine - Contem novos tweets");
 				adapter.addNewElements(newStatuses);
 				Log.d(TAG, "updateTimeLine - novos tweets adicionados");
-				//adapter.notifyDataSetChanged();
+				// adapter.notifyDataSetChanged();
 				Log.d(TAG, "updateTimeLine - adapter notificado");
 				return;
 			}

@@ -4,6 +4,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,8 +71,13 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						// Starting async task to make the update
-						new PostToTwitterTask().execute(editText.getText()
+						// new PostToTwitterTask().execute(editText.getText()
+						// .toString());
+						Intent intent = new Intent(StatusActivity.this,
+								StatusUploadService.class);
+						intent.putExtra("textPost", editText.getText()
 								.toString());
+						startService(intent);
 					}
 				});
 		confirmationWindow.setNegativeButton("No",
@@ -81,12 +87,11 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 				});
 		confirmationWindow.show();
 
-		new PostToTwitterTask().execute(editText.getText().toString());
 		Log.d(TAG, "onClicked2");
 	}
 
 	// Asynchronous post on twitter
-	private class PostToTwitterTask extends AsyncTask<String, Void, Void> {
+	protected class PostToTwitterTask extends AsyncTask<String, Void, Void> {
 		@Override
 		protected Void doInBackground(String... statuses) {
 			Log.d(TAG, "doInBackground!");

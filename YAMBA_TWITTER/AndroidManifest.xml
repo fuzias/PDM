@@ -29,10 +29,11 @@
         <activity
             android:name=".UserPrefActivity"
             android:label="@string/titleUserPref" />
-         <activity
+        <activity
             android:name=".DetailActivity"
             android:label="@string/titlePost" />
+
+        <service android:name=".StatusUploadService" />
     </application>
-    
 
 </manifest>
