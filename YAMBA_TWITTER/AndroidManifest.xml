@@ -32,6 +32,8 @@
          <activity
             android:name=".DetailActivity"
             android:label="@string/titlePost" />
+         <service
+            android:name=".StatusUpdateService"/>
     </application>
     
 

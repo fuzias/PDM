@@ -4,9 +4,13 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,6 +27,27 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 	private EditText editText;
 	private Button updateButton;
 	private TextView textCount;
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			Log.d(TAG, "Recebido do UpdateStatusService");
+			if (msg.getData().containsKey("error")) {
+				Log.d(TAG, msg.getData().getString("error"));
+				Toast.makeText(StatusActivity.this,
+						"An error has ocurred, plz try again!",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(StatusActivity.this,
+						"Status Updated:\n" + editText.getText().toString(),
+						Toast.LENGTH_LONG).show();
+				// Cleaning text area
+				editText.setText(null);
+			}
+			// Enable clicks on update button
+			updateButton.setClickable(true);
+		}
+	};
+	private Messenger messenger;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -43,6 +68,8 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 		// Set listeners
 		updateButton.setOnClickListener(this);
 		editText.addTextChangedListener(this);
+		messenger = new Messenger(handler);
+
 	}
 
 	// Para efeitos de debug
@@ -69,9 +96,15 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 		confirmationWindow.setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
+						// Disable clicks on update button
+						updateButton.setClickable(false);
+
 						// Starting async task to make the update
-						new PostToTwitterTask().execute(editText.getText()
-								.toString());
+						Intent intent = new Intent(StatusActivity.this,
+								StatusUpdateService.class);
+						intent.putExtra("handler", messenger);
+						intent.putExtra("message", editText.getText().toString());
+						startService(intent);
 					}
 				});
 		confirmationWindow.setNegativeButton("No",
@@ -80,47 +113,31 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 					}
 				});
 		confirmationWindow.show();
-
-		new PostToTwitterTask().execute(editText.getText().toString());
 		Log.d(TAG, "onClicked2");
 	}
 
 	// Asynchronous post on twitter
-	private class PostToTwitterTask extends AsyncTask<String, Void, Void> {
-		@Override
-		protected Void doInBackground(String... statuses) {
-			Log.d(TAG, "doInBackground!");
-
-			// Disable clicks on update button
-			updateButton.setClickable(false);
-
-			try {
-				Twitter twitter = ((TwitterApp) getApplication()).getTwitter();
-				if (twitter != null) {
-					twitter.updateStatus(statuses[0]);
-				} else {
-					// TODO Tell user to update preferences
-				}
-			} catch (TwitterException e) {
-				Log.e(TAG, "Twitter update status failed: " + e.getMessage());
-				// Enable update button ?? Is this necessary here ??
-				updateButton.setEnabled(true);
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void d) {
-			Log.d(TAG, "onPostExecute!");
-			Toast.makeText(StatusActivity.this,
-					"Status Updated:\n" + editText.getText().toString(),
-					Toast.LENGTH_LONG).show();
-			// Cleaning text area
-			editText.setText(null);
-			// Enable clicks on update button
-			updateButton.setClickable(true);
-		}
-	}
+	/*
+	 * private class PostToTwitterTask extends AsyncTask<String, Void, Void> {
+	 * 
+	 * @Override protected Void doInBackground(String... statuses) { Log.d(TAG,
+	 * "doInBackground!");
+	 * 
+	 * // Disable clicks on update button updateButton.setClickable(false);
+	 * 
+	 * try { Twitter twitter = ((TwitterApp) getApplication()).getTwitter(); if
+	 * (twitter != null) { twitter.updateStatus(statuses[0]); } else { // TODO
+	 * Tell user to update preferences } } catch (TwitterException e) {
+	 * Log.e(TAG, "Twitter update status failed: " + e.getMessage()); // Enable
+	 * update button ?? Is this necessary here ?? updateButton.setEnabled(true);
+	 * } return null; }
+	 * 
+	 * @Override protected void onPostExecute(Void d) { Log.d(TAG,
+	 * "onPostExecute!"); Toast.makeText(StatusActivity.this,
+	 * "Status Updated:\n" + editText.getText().toString(),
+	 * Toast.LENGTH_LONG).show(); // Cleaning text area editText.setText(null);
+	 * // Enable clicks on update button updateButton.setClickable(true); } }
+	 */
 
 	public void afterTextChanged(Editable s) {
 		Log.d(TAG, "afterTextChanged");
