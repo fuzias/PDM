@@ -8,10 +8,15 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,12 +37,13 @@ public class TwitterApp extends Application implements
 	private static final String TAG = TwitterApp.class.getSimpleName();
 	private Twitter twitter;
 	protected TimelineAdapter adapter;
+	private Intent updateIntent;
+	volatile Messenger messenger;
 
 	protected SharedPreferences userPreferences;
 
 	private List<Status> timelineList;
-	
-	
+	protected Handler timerHandler = new Handler();
 
 	public List<Status> getTimelineList() {
 		return timelineList;
@@ -50,16 +56,21 @@ public class TwitterApp extends Application implements
 		// Setup Preferences
 		userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		userPreferences.registerOnSharedPreferenceChangeListener(this);
+		updateIntent = new Intent(this,TimelineUpdateService.class);
 		
-		/*new Handler(){
+		if (userPreferences.getBoolean("updates", false)) {
+			startService(updateIntent);
+		}
 
-			@Override
-			public void handleMessage(Message msg) {
-				adapter.add(msg.getData().get)
-			}
-			
-			
-		};*/
+		/*
+		 * new Handler(){
+		 * 
+		 * @Override public void handleMessage(Message msg) {
+		 * adapter.add(msg.getData().get) }
+		 * 
+		 * 
+		 * };
+		 */
 	}
 
 	@Override
@@ -70,7 +81,19 @@ public class TwitterApp extends Application implements
 
 	public synchronized void onSharedPreferenceChanged(SharedPreferences arg0,
 			String arg1) {
-		twitter = null;
+		
+		if (arg1.equals("updates")) {
+			if (!userPreferences.getBoolean("updates", false)) {
+				stopService(updateIntent);
+			}
+			else{
+				startService(updateIntent);
+			}
+		}
+		else{
+			twitter = null;
+		}
+		
 	}
 
 	public synchronized Twitter getTwitter() {
@@ -102,7 +125,8 @@ public class TwitterApp extends Application implements
 		return twitter;
 	}
 
-	public synchronized List<Status> getTimeline() {
+	// método chamado no create da TimeLineActivity
+	public synchronized void getTimeline() {// Assync Task
 		Log.d(TAG, "getTimeline");
 		try {
 			timelineList = getTwitter().getUserTimeline();
@@ -110,9 +134,10 @@ public class TwitterApp extends Application implements
 			Log.e(TAG, e.getMessage());
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 		}
-		return timelineList;
+		// return timelineList;
 	}
 
+	// metodo chamado para ir buscar actualizações através do menu
 	public synchronized void updateTimeLine() {
 		try {
 			List<Status> newStatuses = getTwitter().getUserTimeline();
@@ -121,7 +146,7 @@ public class TwitterApp extends Application implements
 				Log.d(TAG, "updateTimeLine - Contem novos tweets");
 				adapter.addNewElements(newStatuses);
 				Log.d(TAG, "updateTimeLine - novos tweets adicionados");
-				//adapter.notifyDataSetChanged();
+				// adapter.notifyDataSetChanged();
 				Log.d(TAG, "updateTimeLine - adapter notificado");
 				return;
 			}
@@ -130,5 +155,20 @@ public class TwitterApp extends Application implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public List<Status> getNewTweets() {
+		try {
+			List<Status> newStatuses = getTwitter().getUserTimeline();
+			newStatuses.removeAll(timelineList);
+			if (!newStatuses.isEmpty()) {
+				Log.d(TAG, "getNewTweets - Contem novos tweets");
+				return newStatuses;
+			}
+			Log.d(TAG, "getNewTweets - Não há novos tweets");
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

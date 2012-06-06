@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class BaseActivity extends Activity {
 	private static final String TAG = "BaseActivity";
@@ -42,12 +41,12 @@ public class BaseActivity extends Activity {
 			break;
 		case R.id.itemUpdateTimeline:
 			((TwitterApp) getApplication()).updateTimeLine();
-						/* 
-			Toast.makeText(this, "Geting Tweets from Twitter",
-					Toast.LENGTH_SHORT);*/
-			// TODO Async get tweets from twitter
+			break;
+		case R.id.itemUserInfo:
+			startActivity(new Intent(this, UserInfoActivity.class));
 			break;
 		}
+
 		return true;
 	}
 

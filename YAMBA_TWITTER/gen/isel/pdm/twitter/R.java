@@ -17,24 +17,31 @@ public final class R {
     public static final class id {
         public static final int buttonUpdate=0x7f070008;
         public static final int editText=0x7f070007;
-        public static final int itemStatus=0x7f07000b;
-        public static final int itemTimeline=0x7f07000c;
-        public static final int itemUpdateTimeline=0x7f07000d;
-        public static final int itemUserPrefs=0x7f07000a;
+        public static final int itemStatus=0x7f070010;
+        public static final int itemTimeline=0x7f070011;
+        public static final int itemUpdateTimeline=0x7f070012;
+        public static final int itemUserInfo=0x7f070013;
+        public static final int itemUserPrefs=0x7f07000f;
         public static final int listTimeline=0x7f070009;
         public static final int messageCreatedAt=0x7f070005;
         public static final int messageMessage=0x7f070004;
         public static final int messageUser=0x7f070003;
+        public static final int numberFollowersUserInfo=0x7f07000e;
+        public static final int numberFollowingUserInfo=0x7f07000d;
+        public static final int numberMessagesUserInfo=0x7f07000c;
         public static final int postDetail=0x7f070001;
         public static final int textCount=0x7f070006;
         public static final int timesincepostDetail=0x7f070002;
+        public static final int titleUserInfo=0x7f07000a;
         public static final int usernameDetail=0x7f070000;
+        public static final int usernameUserInfo=0x7f07000b;
     }
     public static final class layout {
         public static final int detail=0x7f030000;
         public static final int message=0x7f030001;
         public static final int status=0x7f030002;
         public static final int timeline=0x7f030003;
+        public static final int userinfo=0x7f030004;
     }
     public static final class menu {
         public static final int menu=0x7f060000;
@@ -42,10 +49,12 @@ public final class R {
     public static final class string {
         public static final int SummaryAccessToken=0x7f050016;
         public static final int SummaryAccessTokenSecret=0x7f050018;
+        public static final int SummaryAutomaticUpdates=0x7f05001b;
         public static final int SummaryConsumerKey=0x7f050012;
         public static final int SummaryConsumerSecret=0x7f050014;
         public static final int TitleAccessToken=0x7f050015;
         public static final int TitleAccessTokenSecret=0x7f050017;
+        public static final int TitleAutomaticUpdates=0x7f05001a;
         public static final int TitleConsumerKey=0x7f050011;
         public static final int TitleConsumerSecret=0x7f050013;
         public static final int app_name=0x7f050000;
@@ -64,6 +73,7 @@ public final class R {
         public static final int titleStatus=0x7f050001;
         public static final int titleTimeline=0x7f05000b;
         public static final int titleUpdateTimeline=0x7f050010;
+        public static final int titleUserInfo=0x7f05001c;
         public static final int titleUserPref=0x7f05000a;
         public static final int titleUsername=0x7f050004;
     }

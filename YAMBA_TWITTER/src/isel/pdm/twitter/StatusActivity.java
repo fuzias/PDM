@@ -1,12 +1,9 @@
 package isel.pdm.twitter;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -115,29 +112,6 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 		confirmationWindow.show();
 		Log.d(TAG, "onClicked2");
 	}
-
-	// Asynchronous post on twitter
-	/*
-	 * private class PostToTwitterTask extends AsyncTask<String, Void, Void> {
-	 * 
-	 * @Override protected Void doInBackground(String... statuses) { Log.d(TAG,
-	 * "doInBackground!");
-	 * 
-	 * // Disable clicks on update button updateButton.setClickable(false);
-	 * 
-	 * try { Twitter twitter = ((TwitterApp) getApplication()).getTwitter(); if
-	 * (twitter != null) { twitter.updateStatus(statuses[0]); } else { // TODO
-	 * Tell user to update preferences } } catch (TwitterException e) {
-	 * Log.e(TAG, "Twitter update status failed: " + e.getMessage()); // Enable
-	 * update button ?? Is this necessary here ?? updateButton.setEnabled(true);
-	 * } return null; }
-	 * 
-	 * @Override protected void onPostExecute(Void d) { Log.d(TAG,
-	 * "onPostExecute!"); Toast.makeText(StatusActivity.this,
-	 * "Status Updated:\n" + editText.getText().toString(),
-	 * Toast.LENGTH_LONG).show(); // Cleaning text area editText.setText(null);
-	 * // Enable clicks on update button updateButton.setClickable(true); } }
-	 */
 
 	public void afterTextChanged(Editable s) {
 		Log.d(TAG, "afterTextChanged");

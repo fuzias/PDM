@@ -21,5 +21,6 @@
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/titleUpdateTimeline">
     </item>
+    <item android:id="@+id/itemUserInfo" android:title="@string/titleUserInfo" android:icon="@android:drawable/ic_menu_search"></item>
 
 </menu>

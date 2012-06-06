@@ -64,8 +64,6 @@ public class StatusUpdateService extends Service {
 			} catch (RemoteException e) {}
 			return null;
 		}
-
-		
 	}
 
 }

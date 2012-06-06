@@ -3,16 +3,13 @@ package isel.pdm.twitter;
 import java.util.List;
 
 import twitter4j.Status;
-
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 public class TimelineAdapter extends ArrayAdapter<Status>{

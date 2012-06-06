@@ -35,5 +35,8 @@
     
     <string name="TitleAccessTokenSecret">Access Token Secret</string>
     <string name="SummaryAccessTokenSecret">Insert your Access Token Secret</string>
+    
+    <string name="TitleAutomaticUpdates">Twitter Automatic Updates</string>
+    <string name="SummaryAutomaticUpdates">Turn on for automatic updates!</string>
 	
 </resources>
